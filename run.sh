@@ -1,0 +1,3 @@
+#!/bin/bash
+source venv/bin/activate
+python3 src/lsi_parser.py $1

@@ -1,0 +1,39 @@
+# Arquivo .gitignore para o projeto LSI-2025-2 (Python)
+
+### Ambientes Virtuais e Dependências ###
+venv/
+.venv/
+.env
+
+### Cache e Compilação Python ###
+__pycache__/
+*.pyc
+*.pyd
+*.so
+dist/
+build/
+.eggs/
+*.egg-info/
+
+### IDEs e Editores ###
+# VSCode
+.vscode/
+
+# IntelliJ/PyCharm
+.idea/
+
+### Arquivos do Sistema Operacional ###
+# macOS
+.DS_Store
+
+# Linux/Unix
+*~
+.#*
+*.swp
+
+### Saídas e Logs do Projeto ###
+# Arquivos gerados pela documentação (PDF da Parte 2)
+docs/*.pdf
+
+# Logs de execução (se houver)
+*.log

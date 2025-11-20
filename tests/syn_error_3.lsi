@@ -1,0 +1,5 @@
+def f(int A) {
+    int X;
+    X = 5
+    return;   // faltou ';' na linha acima
+}

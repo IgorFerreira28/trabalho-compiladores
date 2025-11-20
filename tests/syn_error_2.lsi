@@ -1,0 +1,5 @@
+def f(int A) {
+    int X;
+    if (A > ) { X = 10; }  // erro sintático: comparação incompleta
+    return;
+}

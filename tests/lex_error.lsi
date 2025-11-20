@@ -1,0 +1,5 @@
+def f(int A) {
+    int X;
+    X = 10;
+    Y$ = 20;   // caractere '$' gera erro léxico
+}

@@ -1,0 +1,65 @@
+// correct_50_lines.lsi
+// Programa com mais de 50 linhas, sem erros sintáticos ou léxicos.
+def fatorial(int N) {
+    int R;
+    int I;
+    I = N; // Inicializa I com N
+    R = 1; // R é o resultado, começa em 1
+
+    if (N > 1) {
+        // Laço de repetição simulado com IF aninhado e chamada recursiva
+        R = N * fatorial(N - 1);
+    } else {
+        R = 1;
+    }
+    return R;
+}
+
+def fibonacci(int N) {
+    int R;
+    if (N == 0) {
+        R = 0;
+    } else {
+        if (N == 1) {
+            R = 1;
+        } else {
+            R = fibonacci(N - 1) + fibonacci(N - 2);
+        }
+    }
+    return R;
+}
+
+def principal() {
+    int A, B, C;
+    int X;
+    int Y;
+
+    A = 5;
+    B = 3;
+
+    // Teste de operadores relacionais e atribuição
+    if (A > B) {
+        C = fatorial(A);
+    } else {
+        C = fatorial(B);
+    }
+
+    print C; // Fatorial de 5 = 120
+
+    // Teste de múltiplas expressões
+    X = 1 + 2 * 3 - (4 / 2); // 1 + 6 - 2 = 5
+    print X;
+
+    // Chamada de função recursiva
+    Y = fibonacci(8); // Fibonacci(8) = 21
+    print Y;
+
+    // Teste de IF aninhado e atribuição
+    if (X != Y) {
+        int Z;
+        Z = Y - X;
+        print Z; // 21 - 5 = 16
+    }
+
+    return;
+}
