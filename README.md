@@ -19,6 +19,7 @@ A estrutura de diretórios do projeto é a seguinte:
         * `parte2.md` (Documentação da Gramática, FIRST, FOLLOW e Tabela LL(1))
         * `README_LEXER.md` (Documentação do Funcionamento do Lexer)
         * `README_PARSER.md` (Documentação da Funcionamento do Parser)
+        * `README_TESTS.md` (Documentação da Funcionamento dos Testes)
     * `src/` (Código Fonte)
         * `lsi_lexer.py` (Analisador Léxico - **Parte 1**)
         * `lsi_parser.py` (Analisador Sintático LL(1) - **Partes 2 e 3**)
