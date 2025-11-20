@@ -1,0 +1,24 @@
+def principal() {
+    int A;
+    int B;
+    int C;
+    int D;
+    int E;
+    int F;
+
+    A = 10;
+    B = 5;
+    C = A + B;
+    D = C * A;
+    E = D / B;
+    F = E - C;
+
+    if (F > 0) {
+        print F;
+    } else {
+        print 0;
+    }
+
+    // LINHA DE FALHA: O RBRACE final está fisicamente AUSENTE no arquivo.
+    return 0; 
+// O ARQUIVO DE TESTE DEVE TERMINAR AQUI.

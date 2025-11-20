@@ -1,7 +1,3 @@
-# lsi_lexer.py
-# Autores: <seu grupo>
-# Implementação do analisador léxico da linguagem LSI-2025-2
-
 from dataclasses import dataclass
 
 KEYWORDS = {"int", "if", "else", "def", "print", "return"}
@@ -18,6 +14,15 @@ SIMPLE_OPS = {'<': 'LT', '>': 'GT'}
 
 @dataclass
 class Token:
+    """
+    Representa um token léxico gerado pelo Lexer.
+
+    Atributos:
+      typ (str): O tipo do token (ex: 'ID', 'NUM', 'PLUS', 'DEF').
+      lexeme (str): A string exata que corresponde ao token no código-fonte.
+      line (int): O número da linha onde o token começa.
+      col (int): O número da coluna onde o token começa.
+    """
     typ: str
     lexeme: str
     line: int
@@ -25,24 +30,50 @@ class Token:
 
 
 class LexerError(Exception):
+    """
+    Exceção customizada para erros léxicos, utilizada para sinalizar
+    a ocorrência de caracteres inválidos.
+    """
     pass
 
 
 class Lexer:
-    def __init__(self, text: str):
-        self.text = text
-        self.i = 0
-        self.line = 1
-        self.col = 1
+    """
+    Analisador Léxico (Lexer) para a linguagem LSI.
 
+    Percorre o código-fonte (string de texto) e o transforma em uma sequência de Tokens.
+    Mantém o controle da posição atual (índice, linha e coluna) e gerencia uma Tabela de Símbolos.
+    """
+
+    def __init__(self, text: str):
+        """
+        Inicializa o Lexer.
+
+        Parâmetros:
+          text (str): A string contendo o código-fonte completo.
+        """
+        self.text = text
+        self.i = 0  # Índice de leitura atual
+        self.line = 1  # Número da linha atual
+        self.col = 1  # Número da coluna atual
+
+        # Inicializa a tabela de símbolos com as palavras-chave
         self.symbol_table = {}
         for kw in KEYWORDS:
             self.symbol_table[kw] = {"kind": "keyword"}
 
     def peek(self):
+        """
+        Retorna o próximo caractere sem avançar o ponteiro (lookahead).
+        Retorna None se o fim do arquivo for alcançado.
+        """
         return None if self.i >= len(self.text) else self.text[self.i]
 
     def advance(self):
+        """
+        Consome o caractere atual, avança o ponteiro de leitura (i)
+        e atualiza os contadores de linha e coluna.
+        """
         c = self.peek()
         if c is None:
             return None
@@ -57,12 +88,22 @@ class Lexer:
         return c
 
     def make_token(self, typ, lexeme, line, col):
+        """
+        Cria um novo objeto Token e gerencia a Tabela de Símbolos.
+
+        Se o tipo for 'ID' e o lexema não estiver na tabela (ou seja, é um novo
+        identificador), ele é registrado.
+        """
         # salva novo ID na tabela de símbolos
         if typ == "ID" and lexeme not in self.symbol_table:
             self.symbol_table[lexeme] = {"kind": "id"}
         return Token(typ, lexeme, line, col)
 
     def skip_space_and_comments(self):
+        """
+        Avança o ponteiro de leitura, ignorando espaços em branco (incluindo quebras de linha)
+        e comentários de linha única ('//').
+        """
         while True:
             c = self.peek()
             if c is None:
@@ -80,6 +121,16 @@ class Lexer:
             break
 
     def next_token(self):
+        """
+        Analisa e retorna o próximo token léxico do stream de entrada.
+        Implementa a lógica de reconhecimento de padrões (autômatos).
+
+        Retorno:
+          Token: O próximo token válido, ou None se o EOF for alcançado.
+
+        Lança:
+          LexerError: Se um caractere inválido for encontrado.
+        """
         self.skip_space_and_comments()
         c = self.peek()
 
@@ -120,9 +171,15 @@ class Lexer:
             return self.make_token(SINGLE_CHAR_TOKENS[self.advance()], c, line, col)
 
         # caso contrário → erro léxico
-        raise LexerError(f"Erro léxico em {line}:{col} — caractere inválido '{c}'")
+        raise LexerError(f"Erro léxico em linha: {line} Coluna: {col} — caractere inválido '{c}'")
 
     def tokenize_all(self):
+        """
+        Executa o Lexer para produzir todos os tokens do código-fonte.
+
+        Retorno:
+          tuple: (list de Tokens, dict Tabela de Símbolos)
+        """
         tokens = []
         while True:
             t = self.next_token()

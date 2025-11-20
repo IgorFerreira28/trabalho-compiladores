@@ -1,0 +1,30 @@
+def calcular_area(int largura, int altura) {
+    int R;
+    int X;
+    int Y;
+    int Z;
+    int W;
+    int M;
+
+    R = largura * altura;
+    X = 100;
+    Y = 50;
+    
+    // LINHA COM ERRO: Falta o SEMI (;) após Z = R + X.
+    // O token 'int' não está no FOLLOW(FACTOR_TAIL), causando No Rule.
+    Z = R + X 
+
+    int W; 
+    W = largura / altura;
+    M = X + Y;
+
+    print R;
+    print X;
+    print W;
+    print M;
+    return W;
+}
+
+def principal() {
+    print calcular_area(10, 5);
+}

@@ -1,0 +1,27 @@
+def funcao_erro() {
+    int A;
+    int B;
+    int C;
+    int D;
+    int E;
+    int F;
+
+    A = 10;
+    B = 5;
+
+    // LINHA COM ERRO: Tentativa de atribuir sem o operador '='.
+    // O parser tentará expandir 'id' (A) seguido por 'EQUAL', mas encontra 'NUM'
+    A 20;
+
+    B = A + 1;
+    C = B - 3;
+    D = A * B;
+    E = C / D;
+    F = E;
+
+    print F;
+    print E;
+    print D;
+    print C;
+    return A;
+}
